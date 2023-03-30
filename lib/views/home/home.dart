@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:tugas1/widgets/input_text.dart';
 
 class HomePage extends StatefulWidget {
@@ -12,6 +15,24 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final srchCtrl = TextEditingController();
+
+  List _pokemons = [];
+
+  void readJson() async {
+    final String response = await rootBundle.loadString('assets/data/pokedex.json');
+    final data = await json.decode(response);
+
+    setState(() {
+      _pokemons = data["pokemons"];
+    });
+  }
+  
+  @override
+  void initState() {
+    super.initState();
+    // Call the readJson method when the app starts
+    readJson();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +87,25 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
+          _pokemons.isNotEmpty ? 
+            Expanded(
+              child: ListView.builder(
+                itemCount: _pokemons.length,
+                itemBuilder: (context, index) {
+                  return Card(
+                    key: ValueKey(_pokemons[index]["id"]),
+                    margin: const EdgeInsets.all(10),
+                    color: Colors.amber.shade100,
+                    child: ListTile(
+                      leading: Text(_pokemons[index]["id"]),
+                      title: Text(_pokemons[index]["name"]),
+                      subtitle: Text(_pokemons[index]["description"]),
+                    ),
+                  );
+                },
+              ),
+            )
+            : Container(),
           const SizedBox(
             height: 50,
           )
