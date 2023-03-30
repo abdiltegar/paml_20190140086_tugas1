@@ -83,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
                                   _formLoginKey.currentState!.save();
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => const HomePage()) 
+                                    MaterialPageRoute(builder: (context) => HomePage(name: nameCtrl.text)) 
                                   );
                                 }else{
                                   debugPrint("Not Validate");

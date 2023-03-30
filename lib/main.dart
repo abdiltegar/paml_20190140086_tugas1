@@ -59,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             const Expanded(
               child: Image(
-                image: AssetImage("assets/img/pokeball.jpg"),
+                image: AssetImage("assets/img/pokeball.png"),
                 width: 200,
                 height: 200,
               ),
