@@ -17,14 +17,14 @@ class _InputPasswordState extends State<InputPassword> {
     return TextFormField(
       keyboardType: TextInputType.visiblePassword,
       obscureText: true,
-      validator: (value) => value.toString().isEmpty ? "Please enter your password" : null,
+      validator: (value) => value.toString().isEmpty ? "Please enter your password" : value.toString().length < 6 ? "Must be at least 6 characters" : null,
       decoration: InputDecoration(
         border: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(5)),
           borderSide: BorderSide.none
         ),
         prefixIcon: widget.prefixIcon,
-        labelText: widget.labelText,
+        hintText: widget.labelText,
         fillColor: Colors.grey.shade200,
         filled: true
       ),

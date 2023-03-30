@@ -17,14 +17,14 @@ class _InputTextState extends State<InputText> {
   Widget build(BuildContext context) {
     return TextFormField(
       keyboardType: TextInputType.text,
-      validator: (value) => value.toString().isEmpty ? widget.validatorMessage : null,
+      validator: (value) => value.toString().isEmpty ? widget.validatorMessage : value.toString().length < 6 ? "Must be at least 6 characters" : null,
       decoration: InputDecoration(
         border: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(5)),
           borderSide: BorderSide.none
         ),
         prefixIcon: widget.prefixIcon,
-        labelText: widget.labelText,
+        hintText: widget.labelText,
         fillColor: Colors.grey.shade200,
         filled: true
       ),
