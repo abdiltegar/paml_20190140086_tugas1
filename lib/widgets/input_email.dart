@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class InputText extends StatefulWidget {
-  const InputText({super.key, required this.validatorMessage, required this.prefixIcon, required this.labelText, required this.controller});
+class InputEmail extends StatefulWidget {
+  const InputEmail({super.key, required this.validatorMessage, required this.prefixIcon, required this.labelText, required this.controller});
 
   final String validatorMessage;
   final Icon prefixIcon;
@@ -9,15 +9,15 @@ class InputText extends StatefulWidget {
   final TextEditingController controller;
 
   @override
-  State<InputText> createState() => _InputTextState();
+  State<InputEmail> createState() => _InputEmailState();
 }
 
-class _InputTextState extends State<InputText> {
+class _InputEmailState extends State<InputEmail> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      keyboardType: TextInputType.text,
-      validator: (value) => value.toString().isEmpty ? widget.validatorMessage : null,
+      keyboardType: TextInputType.emailAddress,
+      validator: (value) => value.toString().isEmpty ? widget.validatorMessage : (!value.toString().contains("@") ? "Please enter a valid email" : null),
       decoration: InputDecoration(
         border: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(5)),
@@ -29,6 +29,6 @@ class _InputTextState extends State<InputText> {
         filled: true
       ),
       controller: widget.controller,
-    );
+    );;
   }
 }
