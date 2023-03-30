@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
 
-class InputEmail extends StatefulWidget {
-  const InputEmail({super.key, required this.prefixIcon, required this.labelText, required this.controller});
+class InputRePassword extends StatefulWidget {
+  const InputRePassword({super.key, required this.prefixIcon, required this.labelText, required this.controller, required this.password});
 
   final Icon prefixIcon;
   final String labelText;
   final TextEditingController controller;
+  final String password;
 
   @override
-  State<InputEmail> createState() => _InputEmailState();
+  State<InputRePassword> createState() => _InputRePasswordState();
 }
 
-class _InputEmailState extends State<InputEmail> {
+class _InputRePasswordState extends State<InputRePassword> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      keyboardType: TextInputType.emailAddress,
-      validator: (value) => value.toString().isEmpty ? "Please enter your email" : (!value.toString().contains("@") ? "Please enter a valid email" : null),
+      keyboardType: TextInputType.visiblePassword,
+      obscureText: true,
+      validator: (value) => value.toString().isEmpty ? "Please enter your password" : ( widget.password != value.toString() ? "Password must be the same" : null),
       decoration: InputDecoration(
         border: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(5)),
