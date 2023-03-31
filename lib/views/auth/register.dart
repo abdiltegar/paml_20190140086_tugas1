@@ -25,7 +25,22 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        foregroundColor: Colors.white,
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: CircleAvatar(
+            backgroundColor: Colors.amber,
+            radius: 100,
+            child: IconButton(
+              onPressed: (){
+                Navigator.pop(context);
+              }, 
+              icon: const Icon(Icons.arrow_back),
+              color: Colors.white
+            ),
+          ),
+        ),
+        backgroundColor: Colors.white,
+        elevation: 0,
       ),
       body: SizedBox(
         width: double.infinity,

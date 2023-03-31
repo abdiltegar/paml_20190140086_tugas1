@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tugas1/views/auth/login.dart';
-import 'package:tugas1/widgets/input_text.dart';
+import 'package:tugas1/views/home/home.dart';
 
 void main() {
   runApp(const MyApp());

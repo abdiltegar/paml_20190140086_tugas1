@@ -26,6 +26,10 @@ class _HomePageState extends State<HomePage> {
       _pokemons = data["pokemons"];
     });
   }
+
+  Color getColor(e){
+    return e == "Grass" ? Colors.green : e == "Poison" ? Colors.purple : e == "Fire" ? Colors.red : Colors.white;
+  }
   
   @override
   void initState() {
@@ -60,8 +64,7 @@ class _HomePageState extends State<HomePage> {
                   width: 75,
                   height: 75,
                   decoration: const BoxDecoration(
-                    image: DecorationImage(
-                        fit: BoxFit.cover, image: NetworkImage('https://www.actualidadiphone.com/wp-content/uploads/2016/07/pokemon-pikachu-go.jpg')),
+                    image: DecorationImage(fit: BoxFit.cover, image: AssetImage("assets/img/ash.png")),
                     borderRadius: BorderRadius.all(Radius.circular(100)),
                   ),
                 ),
@@ -95,11 +98,61 @@ class _HomePageState extends State<HomePage> {
                   return Card(
                     key: ValueKey(_pokemons[index]["id"]),
                     margin: const EdgeInsets.all(10),
-                    color: Colors.amber.shade100,
-                    child: ListTile(
-                      leading: Text(_pokemons[index]["id"]),
-                      title: Text(_pokemons[index]["name"]),
-                      subtitle: Text(_pokemons[index]["description"]),
+                    color: Colors.white,
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            decoration: const BoxDecoration(
+                              color: Colors.amber,
+                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                            ),
+                            child: Image.asset(_pokemons[index]["image"], width: 100, height: 100,)
+                          ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              RichText(
+                                text: TextSpan(
+                                  children: [
+                                    TextSpan(text: _pokemons[index]["id"]+" ", style: const TextStyle(color: Colors.grey)),
+                                    TextSpan(text: _pokemons[index]["name"], style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+                                  ]
+                                )
+                              ),
+                              Wrap(
+                                children: _pokemons[index]["types"].map<Widget>((e) =>
+                                  Padding(
+                                    padding: const EdgeInsets.all(2),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(4),
+                                        color: getColor(e),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(2),
+                                        child: Text(
+                                          e,
+                                          style: const TextStyle(
+                                            color: Colors.white, 
+                                            fontWeight: FontWeight.normal,
+                                            fontSize: 12
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                ).toList(),
+                              ),
+                              Text(_pokemons[index]["description"], style: const TextStyle(color: Colors.grey),)
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   );
                 },
